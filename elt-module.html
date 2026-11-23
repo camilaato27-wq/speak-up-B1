@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Speak Up! B1 – Interactive Gamified ELT Module</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fff8e7;--card:#ffffff;--ink:#1d1b3a;--muted:#4a4766;--p:#5b2be0;--p-ink:#fff;--a:#ff5a5f;--b:#00a6a6;--y:#ffc233;--g:#2e9e4f;--line:#e4dcc4;--obj:#e8f7f7;--fs:17px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#14122b;--card:#201d42;--ink:#f6f3ff;--muted:#c9c4ea;--p:#a98bff;--p-ink:#14122b;--a:#ff8a8e;--b:#4fd6d6;--y:#ffd36b;--g:#6fdc8c;--line:#3a3668;--obj:#183a49}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#14122b;--card:#201d42;--ink:#f6f3ff;--muted:#c9c4ea;--p:#a98bff;--p-ink:#14122b;--a:#ff8a8e;--b:#4fd6d6;--y:#ffd36b;--g:#6fdc8c;--line:#3a3668;--obj:#183a49}
+html{scroll-padding-top:env(safe-area-inset-top,0px);font-size:var(--fs)}
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS",Verdana,Arial,sans-serif;line-height:1.55}
+a{color:var(--p);font-weight:700}
+:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:var(--y);color:#000;padding:8px;z-index:99}
+header{background:linear-gradient(120deg,#5b2be0,#e0338f 60%,#ff7a3d);color:#fff;padding:12px 16px;position:sticky;top:env(safe-area-inset-top,0px);z-index:10}
+.bar{max-width:1000px;margin:auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.logo{font-weight:800;font-size:1.15rem}
+.tools button{background:#fff;color:#1d1b3a;border:0;border-radius:8px;padding:6px 10px;font-weight:700;cursor:pointer;margin-left:4px}
+.pts{background:var(--y);color:#1d1b3a;border-radius:99px;padding:4px 12px;font-weight:800}
+nav{max-width:1000px;margin:8px auto 0;display:flex;flex-wrap:wrap;gap:6px}
+nav a{color:#fff;text-decoration:none;border:2px solid #ffffffaa;border-radius:99px;padding:5px 14px}
+nav a[aria-current="page"]{background:#fff;color:#5b2be0}
+main{max-width:1000px;margin:auto;padding:18px 16px 40px}
+section.view{display:none}section.view:target,section.view.on{display:block}
+h1{font-size:2.1rem;line-height:1.15;margin:.2em 0}h2{color:var(--p);margin-top:0}
+.hero{background:var(--card);border:3px solid var(--p);border-radius:20px;padding:22px}
+.names{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.names span{background:var(--a);color:#1d1b3a;font-weight:800;border-radius:12px;padding:8px 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+.tile{background:var(--card);border:2px solid var(--line);border-top:8px solid var(--c,var(--p));border-radius:14px;padding:14px;text-decoration:none;color:var(--ink);display:block}
+.tile b{font-size:1.15rem;color:var(--ink)}
+.info{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.info h3{margin:.1em 0;color:var(--b)}
+.act{display:grid;grid-template-columns:1fr 250px;gap:14px;background:var(--card);border:2px solid var(--line);border-left:10px solid var(--c,var(--p));border-radius:14px;padding:16px;margin:16px 0}
+@media (max-width:720px){.act{grid-template-columns:1fr}}
+.obj{background:var(--obj);border-radius:12px;padding:12px;font-size:.92rem;align-self:start}
+.obj b{display:block;color:var(--b);margin-bottom:4px}
+.lvl{display:inline-block;background:var(--y);color:#1d1b3a;font-weight:800;border-radius:6px;padding:0 8px;font-size:.8rem}
+.btn{background:var(--p);color:var(--p-ink);border:0;border-radius:10px;padding:9px 16px;font-weight:800;cursor:pointer;font-size:1rem}
+.btn.alt{background:var(--b);color:#102a2a}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--ink);border:2px solid var(--line);border-radius:10px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:1rem}
+.opt.ok{border-color:var(--g);background:color-mix(in srgb,var(--g) 25%,var(--bg))}
+.opt.no{border-color:var(--a);background:color-mix(in srgb,var(--a) 25%,var(--bg))}
+.fb{min-height:1.4em;font-weight:700}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{background:#1d1b3a;color:#ffe27a;border:2px solid #ffe27a;border-radius:8px;padding:5px 10px;cursor:pointer;font-size:.95rem}
+textarea{width:100%;min-height:110px;border:2px solid var(--line);border-radius:10px;padding:10px;font:inherit;background:var(--bg);color:var(--ink)}
+.scen{background:var(--bg);border:2px dashed var(--a);border-radius:12px;padding:12px;margin:8px 0;font-weight:700}
+label{display:block;margin:4px 0}
+ol.ref li{margin:10px 0;padding-left:2em;text-indent:-2em}
+footer{text-align:center;color:var(--muted);padding:16px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+ <div class="bar">
+  <div class="logo">🎤 Speak Up! B1</div>
+  <div class="tools"><span class="pts" aria-live="polite">⭐ <span id="pts">0</span> points</span>
+   <button id="fm" aria-label="Decrease text size">A−</button><button id="fp" aria-label="Increase text size">A+</button><button id="th" aria-label="Toggle light and dark theme">◐</button></div>
+ </div>
+ <nav aria-label="Main navigation" id="nav">
+  <a href="#home">🏠 Home</a><a href="#reading">📖 Reading</a><a href="#listening">🎧 Listening</a><a href="#writing">✍️ Writing</a><a href="#speaking">🗣️ Speaking</a><a href="#references">📚 References</a>
+ </nav>
+</header>
+<main id="main">
+
+<section class="view" id="home">
+ <div class="hero">
+  <span class="lvl">CEFR B1 · Phase 3 Continuation</span>
+  <h1>Interactive Gamified ELT Assessment &amp; Accessibility Module</h1>
+  <p>Practise giving advice and keeping an informal conversation going, with low-stress tasks, flexible ways to answer and instant feedback. Earn ⭐ points as you go!</p>
+  <p><b>Created by:</b></p>
+  <div class="names"><span>Camila Andrea Torres Cervera</span><span>Ana Sofía Velasco Vega</span></div>
+ </div>
+ <div class="grid">
+  <a class="tile" href="#reading" style="--c:#ff5a5f"><b>📖 Reading</b><br>Match problems with advice.</a>
+  <a class="tile" href="#listening" style="--c:#00a6a6"><b>🎧 Listening</b><br>Listen, note and check.</a>
+  <a class="tile" href="#writing" style="--c:#ffc233"><b>✍️ Writing</b><br>Reply to a friend.</a>
+  <a class="tile" href="#speaking" style="--c:#5b2be0"><b>🗣️ Speaking</b><br>Role-play with a partner.</a>
+ </div>
+ <div class="info"><h3>Problem statement</h3><p>Many B1 students feel high foreign language anxiety in spoken interaction assessments. Participation is often unequal and proficiency levels differ. This module reduces those barriers with structured UDL scaffolding and digital interactivity.</p></div>
+ <div class="info"><h3>Learning objective</h3><p>Students will show functional pragmatic competence (giving advice and sustaining informal discussion), strategic communication skills and target vocabulary retention through gamified digital scenarios.</p></div>
+ <div class="info"><h3>Academic articulation</h3><p>Task-Based Language Teaching (TBLT) · Universal Design for Learning (UDL) · CEFR B1 spoken interaction descriptors · interactive digital media (Canva / LabINNOVA tools).</p></div>
+ <div class="info"><h3>UDL features in this module</h3><p>🔊 Dual-mode prompts (text + audio/video) · 🎨 high-contrast phrase banks (yellow on navy) · 🔀 flexible response pathways (say, write or choose) · ✅ real-time formative feedback · 🔠 text size and light/dark controls at the top.</p></div>
+ <div class="info"><h3>Target vocabulary &amp; phrases</h3><div class="bank"><span class="chip">You should…</span><span class="chip">Why don’t you…?</span><span class="chip">If I were you, I’d…</span><span class="chip">How about…?</span><span class="chip">I’d suggest…</span><span class="chip">That’s a good idea!</span><span class="chip">What do you think?</span><span class="chip">Really? Tell me more.</span></div></div>
+</section>
+
+<section class="view" id="reading">
+ <h2>📖 Reading</h2>
+ <article class="act" style="--c:#ff5a5f"><div>
+  <h3>1. Advice Match <span class="lvl">Game</span></h3>
+  <p>Read each message from a friend. Choose the best piece of advice. Mistakes are fine: you get a hint and can try again!</p>
+  <div id="quiz"></div></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can recognise polite advice phrases in short texts, so I feel less anxious when I need to answer a friend in a real conversation.</aside></article>
+ <article class="act" style="--c:#ff5a5f"><div>
+  <h3>2. B1 Reading Practice <span class="lvl">Open resource</span></h3>
+  <p>Choose one short text on a topic you like. Read it twice: first for the main idea, then to find 3 new words. Write them in your word list.</p>
+  <p><a href="https://learnenglish.britishcouncil.org/free-resources/reading/b1" target="_blank" rel="noopener">Open British Council B1 Reading ↗</a></p>
+  <button class="btn alt" data-pts="5" data-once="r2">I finished! (+5 ⭐)</button></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can choose a text at my own level and pace, building vocabulary in a stress-free way that I can use in speaking tasks.</aside></article>
+</section>
+
+<section class="view" id="listening">
+ <h2>🎧 Listening</h2>
+ <article class="act" style="--c:#00a6a6"><div>
+  <h3>1. Listen &amp; Learn: strategies <span class="lvl">Open resource</span></h3>
+  <p>A B1 teacher talks about how to improve listening. Do the preparation task, listen, then do the exercises. Use the transcript if you need it.</p>
+  <p><a href="https://learnenglish.britishcouncil.org/free-resources/listening/b1/interview-about-listening-skills" target="_blank" rel="noopener">Open the lesson ↗</a></p>
+  <button class="btn alt" data-pts="5" data-once="l1">Done (+5 ⭐)</button></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can learn strategies to understand speakers, so that I feel more confident when I have to respond in a conversation.</aside></article>
+ <article class="act" style="--c:#00a6a6"><div>
+  <h3>2. Free listening library <span class="lvl">Open resource</span></h3>
+  <p>Pick a B1 conversation (friends, phone calls, meetings) or a short BBC podcast. Listen once without the text, once with it.</p>
+  <p><a href="https://learnenglish.britishcouncil.org/free-resources/listening/b1" target="_blank" rel="noopener">B1 Listening lessons ↗</a> · <a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank" rel="noopener">BBC 6 Minute English ↗</a></p></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can listen to real informal talk at my own speed and notice how speakers react and keep a conversation going.</aside></article>
+ <article class="act" style="--c:#00a6a6"><div>
+  <h3>3. My Listening Plan <span class="lvl">Self-check</span></h3>
+  <label><input type="checkbox" class="plan"> Before: I read the title and guess 3 words I will hear.</label>
+  <label><input type="checkbox" class="plan"> While: I write 5 keywords, not full sentences.</label>
+  <label><input type="checkbox" class="plan"> After: I read the transcript and underline 2 advice phrases.</label>
+  <p class="fb" id="planfb"></p></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can plan how I listen, which gives me control and reduces anxiety before speaking with a partner.</aside></article>
+</section>
+
+<section class="view" id="writing">
+ <h2>✍️ Writing</h2>
+ <article class="act" style="--c:#ffc233"><div>
+  <h3>1. Reply to a Friend <span class="lvl">Game</span></h3>
+  <p class="scen">Your friend writes: “I feel very nervous when I speak English in class. What should I do?”</p>
+  <p>Write 40–60 words. Tap a phrase to add it.</p>
+  <div class="bank" id="wbank"></div>
+  <textarea id="wt" aria-label="Your reply" placeholder="Hi! I understand you. If I were you, I’d…"></textarea>
+  <p class="fb" id="wc">0 words</p>
+  <button class="btn" id="wsend">Check my reply</button></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can write advice with target phrases first. Practising in writing prepares me to say the same ideas aloud with less fear.</aside></article>
+ <article class="act" style="--c:#ffc233"><div>
+  <h3>2. B1 Writing Practice <span class="lvl">Open resource</span></h3>
+  <p>Choose a short writing lesson (emails, messages, informal texts). Compare your answer with the model.</p>
+  <p><a href="https://learnenglish.britishcouncil.org/free-resources/writing/b1" target="_blank" rel="noopener">Open British Council B1 Writing ↗</a></p>
+  <button class="btn alt" data-pts="5" data-once="w2">I finished! (+5 ⭐)</button></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can use models and feedback to improve my informal writing, so every learner has a fair way to show what they know.</aside></article>
+</section>
+
+<section class="view" id="speaking">
+ <h2>🗣️ Speaking</h2>
+ <article class="act" style="--c:#5b2be0"><div>
+  <h3>1. Advice Role-Play <span class="lvl">Game</span></h3>
+  <p>Work in pairs. Press the button to get a problem. <b>Partner A</b> shares it, <b>Partner B</b> gives advice. Then switch roles, so both of you speak!</p>
+  <button class="btn" id="sc">🎲 New problem</button>
+  <p class="scen" id="scen">Press the button to start.</p>
+  <p><b>Choose your way to answer:</b></p>
+  <label><input type="radio" name="path" value="say"> 🗣️ Say it aloud</label>
+  <label><input type="radio" name="path" value="write"> ✍️ Write it, then read it aloud</label>
+  <label><input type="radio" name="path" value="pick"> 🧩 Build it from the phrase bank</label>
+  <div class="bank" aria-label="Phrase bank"><span class="chip">If I were you, I’d…</span><span class="chip">Why don’t you…?</span><span class="chip">You should…</span><span class="chip">How about…?</span><span class="chip">What do you think?</span><span class="chip">That’s a good idea!</span></div>
+  <button class="btn alt" id="sdone">We switched roles! (+10 ⭐)</button> <span class="fb" id="sfb"></span></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can give advice and keep an informal talk going with a partner, using the way of answering that makes me feel safe. Both partners take turns, so participation is equal.</aside></article>
+ <article class="act" style="--c:#5b2be0"><div>
+  <h3>2. Watch &amp; Repeat: Giving advice <span class="lvl">Open video · stretch</span></h3>
+  <p>Watch Paul, Bob and Noelia and repeat the useful phrases. This lesson is slightly above B1, so use it as a challenge.</p>
+  <p><a href="https://learnenglish.britishcouncil.org/free-resources/speaking/b2/giving-advice" target="_blank" rel="noopener">Open the video lesson ↗</a></p>
+  <button class="btn alt" data-pts="5" data-once="s2">Done (+5 ⭐)</button></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can copy natural advice phrases from a model and practise them privately first, which lowers anxiety before the group task.</aside></article>
+ <article class="act" style="--c:#5b2be0"><div>
+  <h3>3. Peer Feedback Stars <span class="lvl">Self &amp; peer</span></h3>
+  <p>After the role-play, tell your partner one thing they did well and one tip.</p>
+  <div class="bank"><span class="chip">I liked how you…</span><span class="chip">Next time, try…</span><span class="chip">Your advice was clear!</span></div></div>
+  <aside class="obj"><b>🎯 Learning objective</b>I can give and receive kind feedback, which builds a supportive group and helps every proficiency level take part.</aside></article>
+</section>
+
+<section class="view" id="references">
+ <h2>📚 References</h2>
+ <p>APA 7th edition. Online resources were consulted in 2026.</p>
+ <ol class="ref">
+  <li>BBC Learning English. (n.d.). <i>6 Minute English</i>. BBC. https://www.bbc.co.uk/learningenglish/english/features/6-minute-english</li>
+  <li>British Council. (n.d.). <i>An interview about listening skills</i> [Audio lesson]. LearnEnglish. https://learnenglish.britishcouncil.org/free-resources/listening/b1/interview-about-listening-skills</li>
+  <li>British Council. (n.d.). <i>B1 listening</i>. LearnEnglish. https://learnenglish.britishcouncil.org/free-resources/listening/b1</li>
+  <li>British Council. (n.d.). <i>B1 reading</i>. LearnEnglish. https://learnenglish.britishcouncil.org/free-resources/reading/b1</li>
+  <li>British Council. (n.d.). <i>B1 writing</i>. LearnEnglish. https://learnenglish.britishcouncil.org/free-resources/writing/b1</li>
+  <li>British Council. (n.d.). <i>Giving advice</i> [Video lesson]. LearnEnglish. https://learnenglish.britishcouncil.org/free-resources/speaking/b2/giving-advice</li>
+  <li>CAST. (2024). <i>Universal Design for Learning guidelines</i> (Version 3.0). https://udlguidelines.cast.org</li>
+  <li>Council of Europe. (2020). <i>Common European Framework of Reference for Languages: Learning, teaching, assessment. Companion volume</i>. Council of Europe Publishing. https://www.coe.int/lang-cefr</li>
+  <li>Ellis, R. (2003). <i>Task-based language learning and teaching</i>. Oxford University Press.</li>
+  <li>Horwitz, E. K., Horwitz, M. B., &amp; Cope, J. (1986). Foreign language classroom anxiety. <i>The Modern Language Journal, 70</i>(2), 125–132. https://doi.org/10.1111/j.1540-4781.1986.tb05256.x</li>
+  <li>Torres Cervera, C. A., &amp; Velasco Vega, A. S. (2026). <i>Advice Match, My Listening Plan, Reply to a Friend, Advice Role-Play and Peer Feedback Stars</i> [Interactive activities]. In <i>Interactive gamified ELT assessment &amp; accessibility module</i>.</li>
+ </ol>
+</section>
+</main>
+<footer>Camila Andrea Torres Cervera · Ana Sofía Velasco Vega</footer>
+
+<script>
+var pts=0,done={};
+function add(n,k){if(k){if(done[k])return;done[k]=1}pts+=n;document.getElementById('pts').textContent=pts}
+function show(){var h=(location.hash||'#home').slice(1);if(!document.getElementById(h))h='home';
+ document.querySelectorAll('section.view').forEach(function(s){s.classList.toggle('on',s.id===h)});
+ document.querySelectorAll('#nav a').forEach(function(a){a.removeAttribute('aria-current');if(a.getAttribute('href')==='#'+h)a.setAttribute('aria-current','page')});
+ window.scrollTo(0,0)}
+window.addEventListener('hashchange',show);show();
+document.querySelectorAll('[data-pts]').forEach(function(b){b.onclick=function(){add(+b.dataset.pts,b.dataset.once);b.textContent='✓ Done!'}});
+var fs=17;function setfs(d){fs=Math.min(24,Math.max(14,fs+d));document.documentElement.style.setProperty('--fs',fs+'px')}
+document.getElementById('fp').onclick=function(){setfs(2)};document.getElementById('fm').onclick=function(){setfs(-2)};
+document.getElementById('th').onclick=function(){var r=document.documentElement,d=getComputedStyle(r).colorScheme.indexOf('dark')>-1;r.setAttribute('data-theme',d?'light':'dark')};
+var Q=[["“I feel nervous when I speak in class.”",["You should practise with a classmate first.","Stop going to class.","Never speak English."],0,"Good advice is kind and useful!"],
+["“I can’t understand fast speakers.”",["Why don’t you listen with the transcript first?","Give up English.","Ignore everyone."],0,"Look for phrases like “Why don’t you…?”"],
+["“I never get to speak in group work.”",["Stay silent.","If I were you, I’d ask for a speaking role.","Leave the group."],1,"Which option solves the problem politely?"]];
+var qd=document.getElementById('quiz'),score=0;
+Q.forEach(function(q,i){var d=document.createElement('div');d.innerHTML='<p><b>'+(i+1)+'. '+q[0]+'</b></p>';
+ q[1].forEach(function(o,j){var b=document.createElement('button');b.className='opt';b.textContent=o;
+  b.onclick=function(){if(j===q[2]){b.classList.add('ok');f.textContent='✅ Great advice! +5 ⭐';add(5,'q'+i)}else{b.classList.add('no');f.textContent='💡 Try again. '+q[3]}};d.appendChild(b)});
+ var f=document.createElement('p');f.className='fb';f.setAttribute('aria-live','polite');d.appendChild(f);qd.appendChild(d)});
+document.querySelectorAll('.plan').forEach(function(c){c.onchange=function(){var all=[].every.call(document.querySelectorAll('.plan'),function(x){return x.checked});
+ document.getElementById('planfb').textContent=all?'🏆 Plan complete! +5 ⭐':'';if(all)add(5,'plan')}});
+var wt=document.getElementById('wt');
+['You should…','Why don’t you…?','If I were you, I’d…','How about…?','I’d suggest…','Good luck!'].forEach(function(p){var c=document.createElement('button');c.className='chip';c.textContent=p;
+ c.onclick=function(){wt.value+=(wt.value&&!/\s$/.test(wt.value)?' ':'')+p.replace('…','')+' ';wt.focus();cnt()};document.getElementById('wbank').appendChild(c)});
+function cnt(){var n=wt.value.trim()?wt.value.trim().split(/\s+/).length:0;document.getElementById('wc').textContent=n+' words (goal: 40–60)';return n}
+wt.oninput=cnt;
+document.getElementById('wsend').onclick=function(){var n=cnt(),t=wt.value.toLowerCase(),m=/should|why don|if i were|how about|suggest/.test(t),fb=document.getElementById('wc');
+ if(n<40)fb.textContent='✍️ Almost! Write a few more words ('+n+'/40).';else if(!m)fb.textContent='💡 Good length! Now add one advice phrase from the bank.';else{fb.textContent='🏆 Excellent! Length and advice phrases are great. +15 ⭐';add(15,'w1')}};
+var S=["Partner A: “I don’t have time to study and I’m stressed.”","Partner A: “My friend is angry with me and I don’t know why.”","Partner A: “I want to improve my English but I get shy.”","Partner A: “I can’t decide what to do this weekend.”","Partner A: “I’m always tired in the morning.”"];
+document.getElementById('sc').onclick=function(){document.getElementById('scen').textContent=S[Math.floor(Math.random()*S.length)]};
+document.getElementById('sdone').onclick=function(){add(10,'s1');document.getElementById('sfb').textContent='🎉 Both partners spoke!'};
+</script>
+</body>
+</html>
